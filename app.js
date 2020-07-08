@@ -13,6 +13,7 @@ function sha1(str) {
 }
 
 function wechatAuth(req, res) {
+    console.log(req);
     let signature = req.query.signature;
     let echostr = req.query.echostr;
     let timestamp = req.query.timestamp;
@@ -23,6 +24,7 @@ function wechatAuth(req, res) {
     reqArray.sort(); //对数组进行字典排序
     let sortStr = reqArray.join(''); //连接数组
     let sha1Str = sha1(sortStr.toString().replace(/,/g,""));
+    console.log('sha1Str', sha1Str);
     if (signature === sha1Str) {
         res.end(echostr);
     } else {
